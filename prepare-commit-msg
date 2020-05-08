@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+import os
+import json
+from subprocess import check_output
+
+def parse_args():
+  pass
+
+def main(args=None):
+    print("prepare-commit-msg")
+    __location__ = os.path.realpath(
+        os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+    # commit_hash = check_output(['git', 'rev-parse', '--verify', 'HEAD']).strip()
+    # print("commit-hash: %s") % commit_hash
+    with open(os.path.join(__location__, 'commit_hash.txt'), 'w') as outfile:
+        print(sys.argv)
+        if len(sys.argv) > 3:
+            commit_hash = sys.argv[3]
+            print(commit_hash)
+            json.dump(commit_hash, outfile)
+
+if __name__ == "__main__":
+  args = parse_args()
+  main(args)
